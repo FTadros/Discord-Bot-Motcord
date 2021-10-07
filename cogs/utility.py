@@ -11,13 +11,13 @@ class Utility(commands.Cog):
     async def cog_command_error(self, ctx, error):
         print('Error in {0.command.qualified_name}: {1}'.format(ctx, error))
 
-    @commands.command(name = 'wiki', help = 'returns wiki link')
+    @commands.command(name = 'wiki', help = 'returns wiki link of argument')
     async def wiki(self, ctx, *arg):
         arg = '_'.join(arg)
         response = ('https://en.wikipedia.org/wiki/' + arg) 
         await ctx.send(response)
     
-    @commands.command(name = 'roll', help = 'ask this a question')
+    @commands.command(name = 'roll', help = 'ask me a question')
     async def roll(self, ctx, *arg):
         roll_quotes = [
         "Yes", "No" "Dont be stupid, stupid", "Why not",
@@ -40,12 +40,7 @@ class Utility(commands.Cog):
     @commands.has_permissions(administrator=True)
     async def shutdown(self, ctx):
         await ctx.send('Deuces, Logging out of Pain and Suffering')
-        await self.bot.logout()
-
-    # @commands.command(hidden=True)
-    # @commands.has_permissions(administrator=True)
-    # async def restart(self, ctx):
-    #     await ctx.send('OK, restarting')       
+        await self.bot.logout()  
 
     @commands.command(name = 'hello', help = 'says hi to user', aliases=['hi', 'wsp', 'hey'])
     async def hi(self, ctx):

@@ -11,21 +11,18 @@ my_secret = os.getenv('TOKEN')
 
 description = '''Pain and Suffering discord bot, developed with discord.py, @notfelo\n'''
 
+felo = 211639706444627969
 
 class Pain(commands.Bot):
     def __init__(self):
         super().__init__(command_prefix='*', description=description)
 
     async def on_ready(self):
+        self.me = False
         if self.user.id == 772683777503789066:
             self.me = True
-        else:
-            self.me = False
-        '''logger.info('Logged in.')
-        logger.info(f'Bot-Name: {self.user.name} | ID: {self.user.id}')
-        logger.info(f'Dev Mode: {self.me}, Felo: {felo}')
-        logger.info('------')'''
-        print('WE ARE IN')
+
+        print('WE ARE IN THE MAINFRAME')
         #cogs
         await bot.change_presence(
             status=discord.Status.dnd,
@@ -38,6 +35,14 @@ class Pain(commands.Bot):
     async def on_message(self, message):
         if 'dababy' in message.clean_content.lower():
             await message.add_reaction("👶")
+        
+        if (message.author.id == felo or message.author.id == 177870770758746113) and ('rychee' in message.clean_content.lower()):
+            await message.add_reaction("<:RD:860414084305125406>")
+
+        if 'shpd' in message.clean_content.lower():
+            idsuo = ["🇮", "🇩", "🇸", "🇺", "🇴"]
+            for i in idsuo:
+                await message.add_reaction(i) 
         await self.process_commands(message)
 
     async def on_command_error(self, error, ctx):
