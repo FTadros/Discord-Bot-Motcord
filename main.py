@@ -3,8 +3,11 @@ from discord.ext import commands
 from cogs.utility import Utility
 import cogs.help
 import os
+from dotenv import load_dotenv
 
-my_secret = os.environ['TOKEN']
+load_dotenv()
+
+my_secret = os.getenv('TOKEN')
 
 description = '''Pain and Suffering discord bot, developed with discord.py, @notfelo\n'''
 
