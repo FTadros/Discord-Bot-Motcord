@@ -1,7 +1,6 @@
 import discord
 import traceback
 from discord.ext import commands
-import time
 import random
 from cogs.utility import Utility
 import cogs.help

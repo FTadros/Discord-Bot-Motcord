@@ -1,9 +1,7 @@
 import discord
 import traceback
 from discord.ext import commands
-import time
 import random
-import os 
 import sys
 
 class Utility(commands.Cog):
