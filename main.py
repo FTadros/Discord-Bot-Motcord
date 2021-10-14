@@ -3,6 +3,7 @@ from discord.ext import commands
 import os
 from dotenv import load_dotenv
 from pathlib import Path
+from cogs.utility import Utility
 
 load_dotenv()
 my_secret = os.getenv('TOKEN')
@@ -14,17 +15,17 @@ felo = 211639706444627969
 
 class Pain(commands.Bot):
     def __init__(self):
-        self._cogs = [p.stem for p in Path(".").glob("./bot/cogs/*.py")]
+        self._cogs = [Utility]
         super().__init__(command_prefix='*', description=description)
 
     def setup(self):
         print("Setting up shop...")
+        print(self._cogs)
 
         for cog in self._cogs:
-            self.load_extension(bot.cogs.cog)
-            print("Loaded" + cog +'cog')
-
-    print("Setup Compelte")
+            self.add_cog(cog(self))
+            print("Loaded" , cog, 'cog')
+        print("Setup Compelte")
 
     def run(self):
         self.setup()
@@ -38,20 +39,17 @@ class Pain(commands.Bot):
 
         print('WE ARE IN THE MAINFRAME')
         # cogs
-        await bot.change_presence(
+        await self.change_presence(
             status=discord.Status.dnd,
             activity=discord.Game(
                 name="This game called 'Life', but not for long | *help"))
-        self.add_cog(Utility(self))
-        self.add_cog(cogs.help.Help(self))
-        self.help_command = cogs.help.HelpCommand()
 
     async def on_message(self, msg):
         if not msg.author.bot:
             if 'dababy' in msg.clean_content.lower():
                 await msg.add_reaction("👶")
 
-            if (msg.author.id == felo or msg.author.id == 177870770758746113) and ('rychee' in message.clean_content.lower()):
+            if (msg.author.id == felo or msg.author.id == 177870770758746113) and ('rychee' in msg.clean_content.lower()):
                 await msg.add_reaction("<:RD:860414084305125406>")
 
             if 'shpd' in msg.clean_content.lower():
@@ -66,7 +64,3 @@ class Pain(commands.Bot):
                 'This command cannot be used in private messages.')
         elif isinstance(error, commands.DisabledCommand):
             await ctx.channel.send(':x:  This command has been deactivated')
-
-
-bot = Pain()
-bot.run(my_secret)
